@@ -2,7 +2,7 @@
 DYNINST_ROOT = /usr/local
 
 # path to afl src 
-AFL_ROOT = ./afl 
+AFL_ROOT = /home/nicholas/sources/afl 
 
 # path to libelf and libdwarf
 DEPS_ROOT = /usr/local
@@ -11,7 +11,7 @@ DEPS_ROOT = /usr/local
 INSTALL_ROOT = /usr/local
 
 CXX = g++
-CXXFLAGS = -Wall -O3 -std=c++11 -g
+CXXFLAGS = -Wall -O3 -std=c++11 -g -Wl,-rpath,/usr/local/lib
 LIBFLAGS = -fpic -shared
 
 CC = gcc
@@ -27,7 +27,8 @@ afl-dyninst: afl-dyninst.o
 		-o afl-dyninst afl-dyninst.o \
 		-lcommon \
 		-liberty \
-		-ldyninstAPI 
+		-ldyninstAPI \
+		-lboost_system
 
 afl-dyninst2: afl-dyninst2.o
 	$(CXX) $(CXXFLAGS) -L$(DYNINST_ROOT)/lib \
